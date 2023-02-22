@@ -1,6 +1,6 @@
 FROM amazoncorretto:11-alpine3.17 AS builder
 WORKDIR /opt/hello-springrest
-COPY . .
+COPY ./app-springrest .
 CMD ["./gradlew" ,"bootjar"]
 
 FROM amazoncorretto:11-alpine3.17 AS runtime
