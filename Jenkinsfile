@@ -19,8 +19,8 @@ pipeline {
                 withCredentials([string(credentialsId: 'Token_Github', variable:'CR_PAT')]) {
                     sh 'echo $CR_PAT | docker login ghcr.io -u tonysanchez64 --password-stdin'
                 }
-                sh 'docker ghcr.io/tonysanchez64/hello-springrest/hello-springrest:1.0.${BUILD_NUMBER}'
-                sh 'docker ghcr.io/tonysanchez64/hello-springrest/hello-springrest:latest'
+                sh 'docker push ghcr.io/tonysanchez64/hello-springrest/hello-springrest:1.0.${BUILD_NUMBER}'
+                sh 'docker push ghcr.io/tonysanchez64/hello-springrest/hello-springrest:latest'
             }
         }
         stage('deploy') {
