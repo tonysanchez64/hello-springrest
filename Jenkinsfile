@@ -6,7 +6,7 @@ pipeline {
     stages {
         stage('build'){
             steps{
-                sh 'docker build -t "ghcr.io/tonysanchez64/hello-springrest/hello-springrest:latest"'
+                sh 'docker build -t "ghcr.io/tonysanchez64/hello-springrest/hello-springrest:latest" .'
                 sh 'docker tag ghcr.io/tonysanchez64/hello-springrest/hello-springrest:latest ghcr.io/tonysanchez64/hello-springrest/hello-springrest:1.0.${BUILD_NUMBER}'
                 sh 'git tag 1.0.${BUILD_NUMBER}'
                 sshagent(['ssh-github']) {
