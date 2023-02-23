@@ -14,7 +14,7 @@ pipeline {
                 sh './gradlew check'
                 publishIssues([
                        failOnError : boolean
-                       failedNewAll : int (optional)
+                       failedNewAll : int
                        failedNewHigh : int
                        failedNewLow : int
                        failedNewNormal : int
