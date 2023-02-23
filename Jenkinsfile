@@ -8,11 +8,23 @@ pipeline {
 
         stage('Test'){
             steps {
-                sh './gradlew test' 
-                junit allowEmptyResults: true, testResults: 'build/test-results/test/*.xml'
-                jacoco classPattern: 'build/classes', execPattern: 'build/jacoco/*.exec', sourceInclusionPattern: '', sourcePattern: '/src/main/java/com/example/restservice/*java'
+                sh './gradlew test'
+                post {
+                   always { 
+                        junit allowEmptyResults: true, testResults: 'build/test-results/test/*.xml'
+                        jacoco classPattern: 'build/classes', execPattern: 'build/jacoco/*.exec', sourceInclusionPattern: '', sourcePattern: '/src/main/java/com/example/restservice/*java'
+                
+                   }
+                }
+        stage('Check'){
+            steps {
                 sh './gradlew check'
-                recordIssues(tools: [pmdParser(pattern: 'build/reports/pmd/*xml')])
+                post {
+                   always {
+                        recordIssues(tools: [pmdParser(pattern: 'build/reports/pmd/*xml')])
+
+                   }
+                }
             }
         }
 
