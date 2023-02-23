@@ -11,6 +11,19 @@ pipeline {
                 sh './gradlew test' 
                 junit allowEmptyResults: true, testResults: 'app-springrest/build/test-results/test/*.xml'
                 jacoco classPattern: 'build/classes', execPattern: 'build/jacoco/*.exec', sourceInclusionPattern: '', sourcePattern: '/src/main/java/com/example/restservice/*java'
+                sh './gradlew check'
+                publishIssues([
+                       failOnError : boolean
+                       failedNewAll : int (optional)
+                       failedNewHigh : int
+                       failedNewLow : int
+                       failedNewNormal : int
+                       failedTotalAll : int
+                       failedTotalHigh : int 
+                       failedTotalLow : int
+                       failedTotalNormal : int
+                       healthy : int
+                ])
             }
         }
 
