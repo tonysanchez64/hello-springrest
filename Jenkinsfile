@@ -12,7 +12,7 @@ pipeline {
                 junit allowEmptyResults: true, testResults: 'app-springrest/build/test-results/test/*.xml'
                 jacoco classPattern: 'build/classes', execPattern: 'build/jacoco/*.exec', sourceInclusionPattern: '', sourcePattern: '/src/main/java/com/example/restservice/*java'
                 sh './gradlew check'
-                publishIssues : 'build/reports/pmd/*xml'
+                publishIssues : ['build/reports/pmd/*xml',]
             }
         }
 
