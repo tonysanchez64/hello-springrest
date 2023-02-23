@@ -19,7 +19,7 @@ pipeline {
                 sh './gradlew check'
                 recordIssues(tools: [pmdParser(pattern: 'build/reports/pmd/*.xml')])
                 sh 'trivy fs .'
-                recordIssues(tools: [xmlLint(pattern: 'build/tmp/expandedArchives/org.jacoco.agent-0.8.7.jar_3a83c50b4a016f281c4e9f3500d16b55/META-INF/maven/org.jacoco/org.jacoco.agent/*.xml')])
+                recordIssues(tools: [trivy(pattern: 'build/tmp/expandedArchives/org.jacoco.agent-0.8.7.jar_3a83c50b4a016f281c4e9f3500d16b55/META-INF/maven/org.jacoco/org.jacoco.agent/*.xml')])
             }
         }
 
