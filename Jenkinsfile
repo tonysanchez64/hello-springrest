@@ -16,6 +16,8 @@ pipeline {
                 
                    }
                 }
+            }
+        }
         stage('Check'){
             steps {
                 sh './gradlew check'
