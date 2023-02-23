@@ -8,9 +8,7 @@ pipeline {
 
         stage('Test'){
             steps {
-                dir('app-springrest'){
-                    sh './gradlew test'
-                } 
+                sh './gradlew test' 
                 junit allowEmptyResults: true, testResults: 'app-springrest/build/test-results/test/*.xml'
             }
         }
