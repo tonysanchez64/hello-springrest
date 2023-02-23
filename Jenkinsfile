@@ -9,7 +9,7 @@ pipeline {
         stage('Test'){
             steps {
                 sh './gradlew test' 
-                junit allowEmptyResults: true, testResults: 'app-springrest/build/test-results/test/*.xml'
+                junit allowEmptyResults: true, testResults: 'build/test-results/test/*.xml'
                 jacoco classPattern: 'build/classes', execPattern: 'build/jacoco/*.exec', sourceInclusionPattern: '', sourcePattern: '/src/main/java/com/example/restservice/*java'
                 sh './gradlew check'
                 recordIssues(tools: [pmdParser(pattern: 'build/reports/pmd/*xml')])
