@@ -2,8 +2,19 @@ pipeline {
     agent any
     options{
         timestamps()
+        ansiColor('xterm')
     }
     stages {
+
+        stage('Test'){
+            steps {
+                dir('app-springrest'){
+                    sh './gradlew test'
+                } 
+                junit allowEmptyResults: true, testResults: './app-springrest/build/test-results/test/*.xml'
+            }
+        }
+
         stage('build'){
             steps{
                 sh 'docker build -t "ghcr.io/tonysanchez64/hello-springrest/hello-springrest:latest" .'
@@ -14,6 +25,7 @@ pipeline {
                 }
            }
         }
+
         stage('pacakge'){
             steps {
                 withCredentials([string(credentialsId: 'Token_Github', variable:'CR_PAT')]) {
@@ -23,6 +35,7 @@ pipeline {
                 sh 'docker push ghcr.io/tonysanchez64/hello-springrest/hello-springrest:latest'
             }
         }
+
         stage('deploy') {
             steps {
                 withAWS(credentials: 'credenciales-aws', region: 'eu-west-1') {
