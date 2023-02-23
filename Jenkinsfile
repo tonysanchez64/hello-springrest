@@ -11,7 +11,7 @@ pipeline {
                 dir('app-springrest'){
                     sh './gradlew test'
                 } 
-                junit allowEmptyResults: true, testResults: './app-springrest/build/test-results/test/*.xml'
+                junit allowEmptyResults: true, testResults: 'app-springrest/build/test-results/test/*.xml'
             }
         }
 
