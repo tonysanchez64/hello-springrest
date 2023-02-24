@@ -49,7 +49,7 @@ pipeline {
             steps {
                 withAWS(credentials: 'credenciales-aws', region: 'eu-west-1') {
                   dir('eb'){
-                       sh 'eb deploy'
+                       sh 'eb deploy hello-eb'
                   }
                 }
             }
